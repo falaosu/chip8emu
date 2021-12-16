@@ -30,13 +30,10 @@ pub struct Cpu {
     should_draw: bool,
 }
 
-const _: &str = match size_of::<Cpu>() {
-    #[cfg(target_vendor = "apple")]
-    128 => "",
-    #[cfg(not(target_vendor = "apple"))]
-    136 => "",
-    x => ["size of Cpu != 136"][x],
-};
+#[cfg(target_vendor = "apple")]
+const _: () = assert!(size_of::<Cpu>() == 128);
+#[cfg(not(target_vendor = "apple"))]
+const _: () = assert!(size_of::<Cpu>() == 136);
 
 impl Cpu {
     pub fn new() -> Self {
