@@ -52,7 +52,6 @@ jobs:
           path: target
           key: ${{ runner.os }}-cargo-target-dir-${{ steps.cargo-target-cache.outputs.rust_hash }}-${{ hashFiles('**/Cargo.lock') }}
       - run: cargo update
-      - run: cat Cargo.lock
       - run: cargo check
 
       - run: sudo apt-get install --no-install-recommends libsdl2-dev
